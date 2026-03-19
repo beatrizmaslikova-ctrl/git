@@ -1,7 +1,7 @@
 body {
     font-family: Arial;
-    text-align: center;
-    background-color: #f4f4f4;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
 }
 
 .container {
@@ -14,9 +14,16 @@ input {
 }
 
 button {
-    padding: 10px;
-    margin-left: 5px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #4c7daf;
+    color: white;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #455ca0;
 }
 
 li {
