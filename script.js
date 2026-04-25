@@ -1,57 +1,28 @@
-let tasks = [];
-
-// загрузка задач с сервера
-window.onload = function () {
+// загрузка задач
+function loadTasks() {
     fetch("http://localhost:3000/tasks")
         .then(res => res.json())
-        .then(data => {
-            tasks = data;
-            tasks.forEach(task => addTaskToList(task));
+        .then(tasks => {
+            let list = document.getElementById("list");
+            list.innerHTML = "";
+
+            tasks.forEach(t => {
+                let li = document.createElement("li");
+                li.textContent = t.text;
+                list.appendChild(li);
+            });
         });
-};
+}
 
 // добавить задачу
 function addTask() {
-    let input = document.getElementById("taskInput");
-    let text = input.value;
-
-    if (text === "") return;
-
-    let task = {
-        text: text,
-        date: new Date().toLocaleString()
-    };
+    let text = document.getElementById("taskInput").value;
 
     fetch("http://localhost:3000/tasks", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(task)
-    })
-    .then(() => {
-        addTaskToList(task);
-        input.value = "";
-    });
-}
-
-// вывести задачу
-function addTaskToList(task) {
-    let li = document.createElement("li");
-
-    let span = document.createElement("span");
-    span.textContent = task.text + " (" + task.date + ")";
-
-    let deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.onclick = function () {
-        li.remove();
-    };
-
-    li.appendChild(span);
-    li.appendChild(deleteBtn);
-
-    document.getElementById("taskList").appendChild(li);
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ text })
+    }).then(() => loadTasks());
 }
 
 // регистрация
@@ -60,8 +31,8 @@ function register() {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-            username: document.getElementById("username").value,
-            password: document.getElementById("password").value
+            username: username.value,
+            password: password.value
         })
     })
     .then(res => res.json())
@@ -74,16 +45,12 @@ function login() {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-            username: document.getElementById("username").value,
-            password: document.getElementById("password").value
+            username: username.value,
+            password: password.value
         })
     })
     .then(res => res.json())
-    .then(data => {
-        alert(data.message);
-
-        if (data.message === "Login success") {
-            localStorage.setItem("user", "logged");
-        }
-    });
+    .then(data => alert(data.message));
 }
+
+loadTasks();

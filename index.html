@@ -2,25 +2,20 @@
 <html>
 <head>
     <title>Task Manager</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Task Manager</h1>
-
 <h2>Login</h2>
 <input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
+<input id="password" placeholder="Password">
 <button onclick="register()">Register</button>
 <button onclick="login()">Login</button>
 
 <h2>Tasks</h2>
-<div class="container">
-    <input type="text" id="taskInput" placeholder="Enter a task">
-    <button onclick="addTask()">Add Task</button>
+<input id="taskInput" placeholder="Task">
+<button onclick="addTask()">Add</button>
 
-    <ul id="taskList"></ul>
-</div>
+<ul id="list"></ul>
 
 <script src="script.js"></script>
 </body>

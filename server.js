@@ -6,40 +6,37 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-let tasks = [];
-let users = [];
+let data = { tasks: [], users: [] };
 
-// загрузка файла
+// загрузка
 if (fs.existsSync("data.json")) {
-    const data = JSON.parse(fs.readFileSync("data.json"));
-    tasks = data.tasks || [];
-    users = data.users || [];
+    data = JSON.parse(fs.readFileSync("data.json"));
 }
 
 // сохранить
-function saveData() {
-    fs.writeFileSync("data.json", JSON.stringify({ tasks, users }));
+function save() {
+    fs.writeFileSync("data.json", JSON.stringify(data));
 }
 
-// регистрация
+// REGISTER
 app.post("/register", (req, res) => {
     const { username, password } = req.body;
 
-    if (users.find(u => u.username === username)) {
+    if (data.users.find(u => u.username === username)) {
         return res.json({ message: "User exists" });
     }
 
-    users.push({ username, password });
-    saveData();
+    data.users.push({ username, password });
+    save();
 
     res.json({ message: "Registered" });
 });
 
-// логин
+// LOGIN
 app.post("/login", (req, res) => {
     const { username, password } = req.body;
 
-    const user = users.find(
+    const user = data.users.find(
         u => u.username === username && u.password === password
     );
 
@@ -48,18 +45,16 @@ app.post("/login", (req, res) => {
     res.json({ message: "Login success" });
 });
 
-// получить задачи
+// GET TASKS
 app.get("/tasks", (req, res) => {
-    res.json(tasks);
+    res.json(data.tasks);
 });
 
-// добавить задачу
+// ADD TASK
 app.post("/tasks", (req, res) => {
-    tasks.push(req.body);
-    saveData();
-    res.json({ message: "Task added" });
+    data.tasks.push(req.body);
+    save();
+    res.json({ message: "Added" });
 });
 
-app.listen(3000, () => {
-    console.log("Server running on http://localhost:3000");
-});
+app.listen(3000, () => console.log("Server started"));
