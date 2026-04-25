@@ -6,23 +6,20 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// "база данных" (файл)
 let tasks = [];
 let users = [];
 
-// загрузка из файла
+// загрузка файла
 if (fs.existsSync("data.json")) {
     const data = JSON.parse(fs.readFileSync("data.json"));
     tasks = data.tasks || [];
     users = data.users || [];
 }
 
-// сохранить в файл
+// сохранить
 function saveData() {
     fs.writeFileSync("data.json", JSON.stringify({ tasks, users }));
 }
-
-// -------- AUTH --------
 
 // регистрация
 app.post("/register", (req, res) => {
@@ -34,6 +31,7 @@ app.post("/register", (req, res) => {
 
     users.push({ username, password });
     saveData();
+
     res.json({ message: "Registered" });
 });
 
@@ -50,8 +48,6 @@ app.post("/login", (req, res) => {
     res.json({ message: "Login success" });
 });
 
-// -------- TASKS --------
-
 // получить задачи
 app.get("/tasks", (req, res) => {
     res.json(tasks);
@@ -59,17 +55,9 @@ app.get("/tasks", (req, res) => {
 
 // добавить задачу
 app.post("/tasks", (req, res) => {
-    const task = req.body;
-    tasks.push(task);
+    tasks.push(req.body);
     saveData();
     res.json({ message: "Task added" });
-});
-
-// удалить задачу
-app.delete("/tasks/:id", (req, res) => {
-    tasks.splice(req.params.id, 1);
-    saveData();
-    res.json({ message: "Deleted" });
 });
 
 app.listen(3000, () => {

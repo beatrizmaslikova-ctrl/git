@@ -7,24 +7,17 @@
 <body>
 
 <h1>Task Manager</h1>
+
 <h2>Login</h2>
 <input id="username" placeholder="Username">
 <input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
 <button onclick="register()">Register</button>
-
-<h2>User Name</h2>
-<div class="container">
-    <input type="text" id="nameText" placeholder="Enter a name">
-    <button onclick="addName()">Add Name</button>
-    <ul id="nameList"></ul>
-</div>
+<button onclick="login()">Login</button>
 
 <h2>Tasks</h2>
 <div class="container">
     <input type="text" id="taskInput" placeholder="Enter a task">
     <button onclick="addTask()">Add Task</button>
-    <button onclick="clearTasks()">Clear All</button>
 
     <ul id="taskList"></ul>
 </div>
