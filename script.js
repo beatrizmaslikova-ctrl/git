@@ -10,24 +10,6 @@ window.onload = function () {
 };
 
 
-function addTask() {
-    let input = document.getElementById("taskInput");
-    let text = input.value;
-
-    if (text === "") return;
-
-    let task = {
-        text: text,
-        date: new Date().toLocaleString(),
-        done: false
-    };
-
-    tasks.push(task);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-
-    addTaskToList(task);
-    input.value = "";
-}
 
 
 function addTaskToList(task) {
@@ -97,4 +79,50 @@ function addName() {
 
     document.getElementById("nameList").appendChild(li);
     input.value = "";
+}
+function register() {
+    fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+        })
+    }).then(res => res.json())
+      .then(data => alert(data.message));
+}
+
+function login() {
+    fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+        })
+    }).then(res => res.json())
+      .then(data => alert(data.message));
+}
+function addTask() {
+    let input = document.getElementById("taskInput");
+    let text = input.value;
+
+    if (text === "") return;
+
+    let task = {
+        text: text,
+        date: new Date().toLocaleString()
+    };
+
+    fetch("http://localhost:3000/tasks", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(task)
+    })
+    .then(() => {
+        addTaskToList(task);
+        input.value = "";
+    });
 }
