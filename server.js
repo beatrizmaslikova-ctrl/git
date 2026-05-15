@@ -3,23 +3,25 @@ const fs = require("fs");
 const cors = require("cors");
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
 let data = { tasks: [], users: [] };
 
-// загрузка
+// LOAD DATA
 if (fs.existsSync("data.json")) {
     data = JSON.parse(fs.readFileSync("data.json"));
 }
 
-// сохранить
+// SAVE DATA
 function save() {
     fs.writeFileSync("data.json", JSON.stringify(data));
 }
 
 // REGISTER
 app.post("/register", (req, res) => {
+
     const { username, password } = req.body;
 
     if (data.users.find(u => u.username === username)) {
@@ -27,6 +29,7 @@ app.post("/register", (req, res) => {
     }
 
     data.users.push({ username, password });
+
     save();
 
     res.json({ message: "Registered" });
@@ -34,13 +37,16 @@ app.post("/register", (req, res) => {
 
 // LOGIN
 app.post("/login", (req, res) => {
+
     const { username, password } = req.body;
 
     const user = data.users.find(
         u => u.username === username && u.password === password
     );
 
-    if (!user) return res.json({ message: "Invalid login" });
+    if (!user) {
+        return res.json({ message: "Invalid login" });
+    }
 
     res.json({ message: "Login success" });
 });
@@ -52,22 +58,22 @@ app.get("/tasks", (req, res) => {
 
 // ADD TASK
 app.post("/tasks", (req, res) => {
+
     data.tasks.push(req.body);
+
     save();
-    res.json({ message: "Added" });
+
+    res.json({ message: "Task added" });
 });
 
-app.listen(3000, () => console.log("Server started"));
-
-app.listen (3000
-    // DELETE TASK
+// DELETE TASK
 app.delete("/tasks/:id", (req, res) => {
 
     data.tasks.splice(req.params.id, 1);
 
     save();
 
-    res.json({ message: "Deleted" });
+    res.json({ message: "Task deleted" });
 });
 
 // EDIT TASK
@@ -77,5 +83,10 @@ app.put("/tasks/:id", (req, res) => {
 
     save();
 
-    res.json({ message: "Updated" });
-})) ;
+    res.json({ message: "Task updated" });
+});
+
+// START SERVER
+app.listen(3000, () => {
+    console.log("Server started");
+});
