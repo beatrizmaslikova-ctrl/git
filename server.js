@@ -58,3 +58,24 @@ app.post("/tasks", (req, res) => {
 });
 
 app.listen(3000, () => console.log("Server started"));
+
+app.listen (3000
+    // DELETE TASK
+app.delete("/tasks/:id", (req, res) => {
+
+    data.tasks.splice(req.params.id, 1);
+
+    save();
+
+    res.json({ message: "Deleted" });
+});
+
+// EDIT TASK
+app.put("/tasks/:id", (req, res) => {
+
+    data.tasks[req.params.id] = req.body;
+
+    save();
+
+    res.json({ message: "Updated" });
+})) ;
