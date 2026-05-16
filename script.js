@@ -154,7 +154,12 @@ function login() {
         }
     });
     function logout() {
+
     currentUser = "";
-    location.reload();
+
+    document.getElementById("list").innerHTML = "";
+
+    alert("Logged out");
+
 }
 }
