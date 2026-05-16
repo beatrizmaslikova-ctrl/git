@@ -163,3 +163,11 @@ function login() {
 
 }
 }
+function logout() {
+
+    currentUser = "";
+
+    document.getElementById("list").innerHTML = "";
+
+    alert("Logged out");
+}
