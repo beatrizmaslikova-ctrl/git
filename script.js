@@ -1,3 +1,10 @@
+function startApp() {
+
+    document.getElementById("startScreen").style.display = "none";
+
+    document.getElementById("app").style.display = "block";
+}
+
 let currentUser = "";
 
 // LOAD TASKS
