@@ -153,4 +153,8 @@ function login() {
             loadTasks();
         }
     });
+    function logout() {
+    currentUser = "";
+    location.reload();
+}
 }
