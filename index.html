@@ -6,27 +6,37 @@
 </head>
 <body>
 
-<div class="main">
+<div id="startScreen" class="start-screen">
 
-<h1>Task Manager</h1>
+    <h1>Welcome to Task Manager</h1>
 
-<h2>Login</h2>
-<input id="username" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
+    <button onclick="startApp()">Start</button>
 
-<br>
+</div>
 
-<button onclick="register()">Register</button>
-<button onclick="login()">Login</button>
+<div id="app" style="display:none;">
 
-<h2>Tasks</h2>
+    <h1>Task Manager</h1>
 
-<input id="taskInput" placeholder="Task">
-<button onclick="addTask()">Add</button>
+    <h2>Login</h2>
 
-<ul id="list"></ul>
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+
+    <br>
+
+    <button onclick="register()">Register</button>
+    <button onclick="login()">Login</button>
+
+    <h2>Tasks</h2>
+
+    <input id="taskInput" placeholder="Task">
+    <button onclick="addTask()">Add</button>
+
+    <ul id="list"></ul>
 
 </div>
 
 <script src="script.js"></script>
+
 </body>

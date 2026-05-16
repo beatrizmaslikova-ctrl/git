@@ -1,1 +1,1 @@
-{"tasks":[],"users":[{"username":"beatriz","password":"beatriz"},{"username":"nana","password":"nana"}]}
+{"tasks":[{"text":"bat","user":"beatriz"}],"users":[{"username":"beatriz","password":"beatriz"},{"username":"nana","password":"nana"},{"username":"cat","password":"cat"}]}
