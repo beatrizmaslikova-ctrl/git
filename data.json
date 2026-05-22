@@ -1,1 +1,1 @@
-{"tasks":[{"text":"bat","user":"beatriz"}],"users":[{"username":"beatriz","password":"beatriz"},{"username":"nana","password":"nana"},{"username":"cat","password":"cat"}]}
+{"tasks":[{"text":"task num 1","user":"beatriz"},{"text":"task num 2","user":"beatriz"},{"text":"cook","user":""},{"text":"cook","user":""},{"text":"janis","user":"janis"}],"users":[{"username":"beatriz","password":"beatriz"},{"username":"nana","password":"nana"},{"username":"cat","password":"cat"},{"username":"janis","password":"janis"},{"username":"dog","password":"dog"}]}
